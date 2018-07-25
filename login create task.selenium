@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8888/" />
+<title>login create task</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">login create task</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/participact-server/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=h2 &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_username</td>
+	<td>root</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_password</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tasks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>A new task is b</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>The description of the task. http://amirunningxp.com/</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start</td>
+	<td>2014-02-13 15:20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=deadline</td>
+	<td>2014-05-01 15:20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=points</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=duration</td>
+	<td>90</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_activation_area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=activationArea</td>
+	<td>POLYGON((11.320466995239258 44.48744370505992,11.324071884155273 44.49319922527361,11.34587287902832 44.49185223953622,11.335916519165039 44.48156514075307,11.322183609008789 44.4803403652934,11.320466995239258 44.48744370505992))</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_notification_area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_new_notification_area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=notificationArea</td>
+	<td>POLYGON((11.320466995239258 44.48744370505992,11.324071884155273 44.49319922527361,11.34587287902832 44.49185223953622,11.335916519165039 44.48156514075307,11.322183609008789 44.4803403652934,11.320466995239258 44.48744370505992))</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Take a picture!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_questionnaire</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=title</td>
+	<td>Questo questionario.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Description</td>
+	<td>Questo questionario misura il tuo amore per SQLite e ORMlite.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_openquestion</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=question</td>
+	<td>Come ti fa sentire la serializzazione? Sii descrittivo!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_closedquestionsin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=question</td>
+	<td>Sono stato serializzato correttamente?</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=answers0</td>
+	<td>Sì</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=answers1</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_closedquestionmul</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=question</td>
+	<td>Risposta multipla!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=answers0</td>
+	<td>Uno</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=answers1</td>
+	<td>Zwei</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=answers2</td>
+	<td>Tres</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_closedquestionsin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=question</td>
+	<td>Risposta multipla di sicurezza</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=answers0</td>
+	<td>Alfa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=answers1</td>
+	<td>Beta</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=answers2</td>
+	<td>Gamma</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_done</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Altra foto!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=numeric_threshold</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=sensingDuration</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=BATTERY</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=LOCATION</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

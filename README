@@ -1,0 +1,38 @@
+How to import in eclipse:
+
+1) install gradle http://www.gradle.org/downloads
+2) run: gradle eclipse
+3) start eclipse
+4) File -> Import -> Existing Projects into Workspace
+5) select participact-server
+6) right click on the project and choose Configure -> Convert to Gradle Project
+
+================
+
+Set up Tomcat:
+
+1) Add a Charset Encoding filter to support UTF-8: edit web.xml of tomcat (v7.x)
+   and add the following filter as *first* filter:
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+2) Edit the Connector to interpret URIs as UTF-8:
+    <Connector URIEncoding="UTF-8" connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+
+================
+
+When use this application in your publications, please cite:
+ - ParticipAct: A Large-Scale Crowdsensing Platform (http://ieeexplore.ieee.org/document/7111277/) 
+ - Mobile crowd sensing management with the ParticipAct living lab (https://www.sciencedirect.com/science/article/pii/S1574119216302127)
+ 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<input name="taskId" required="true"/>
+	
+
+	<on-start>
+<!-- 		<set name="flowScope.taskId" value="requestParameters.taskId" -->
+<!-- 			type="long" /> -->
+		<evaluate expression="taskAddUsersController.getTask(taskId)" result="flowScope.task" />
+		<evaluate expression="taskAddUsersController.initAssignedUsersForm()" result="flowScope.taskAssignedUsersForm" />
+		<evaluate expression="taskAddUsersController.initAllUsers()"	result="flowScope.allUsersArrayString" />
+	</on-start>
+	
+	<decision-state id="checkTask">
+		<if test="flowScope.task == null" then="end" else="taskSelectUsers" />
+	</decision-state>
+
+	<view-state id="taskSelectUsers" model="taskAssignedUsersForm"
+		view="/protected/task/addUsers/addUsers">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="taskSummary">
+			<evaluate
+				expression="taskAddUsersController.validateSelectedUsers(taskId, taskAssignedUsersForm, messageContext)" />
+		</transition>
+		<transition on="cancel" to="endCancel" />
+	</view-state>
+	
+	<view-state id="taskSummary" model="taskAssignedUsersForm" view="/protected/task/addUsers/taskSummary">
+	<secured attributes="ROLE_ADMIN"/>
+		<transition on="next" to="confirm">
+			<evaluate expression="taskAddUsersController.assignNewUsers(taskId, taskAssignedUsersForm)" />
+		</transition>
+		<transition on="cancel" to="endCancel" />
+	</view-state>
+	
+	<view-state id="confirm" model="taskAssignedUsersForm" view="/protected/task/addUsers/confirmation">
+	<secured attributes="ROLE_ADMIN"/>
+		<transition on="finish" to="end" />
+	</view-state>
+
+	<end-state id="endCancel" view="redirect:/protected/task"></end-state>
+	<end-state id="end" view="redirect:/protected/task" />
+</flow>

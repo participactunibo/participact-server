@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<on-start>
+		<evaluate expression="taskAddController.initTask()" result="flowScope.task" />
+		<evaluate expression="taskAddController.initAllUsers()"
+			result="flowScope.allUsersArrayString" />
+	</on-start>
+
+	<view-state id="taskDetails" view="/protected/task/add/taskDetails"
+		model="task">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="selectActionType">
+			<evaluate
+				expression="taskAddController.validateTaskDescription(flowScope.task, messageContext)" />
+		</transition>
+		<transition on="cancel" to="end" />
+	</view-state>
+
+	<view-state id="selectActionType" view="/protected/task/add/selectActionType"
+		model="task">
+		<secured attributes="ROLE_ADMIN" />
+		<on-render>
+			<evaluate expression="flowScope.task.hasActivityDetection()"
+				result="flowScope.hasActivityDetection" />
+		</on-render>
+		<transition on="sensingMost" to="checkSensing">
+			<evaluate expression="taskAddController.initAvailablePipelines(flowScope.task)"
+				result="flowScope.availablePipelines" />
+			<evaluate expression="taskAddController.initActionSensing()"
+				result="flowScope.actionSensing" />
+		</transition>
+		<transition on="photo" to="actionPhoto">
+			<evaluate expression="taskAddController.initActionPhoto()"
+				result="flowScope.actionPhoto" />
+		</transition>
+		
+		
+		<!-- /****************************************************************************************/ -->
+		<transition on="interestPoint" to="actionGeofence" >
+	<evaluate expression="taskAddController.initActionGeofenceList()"
+		result="flowScope.actionGeofenceList" />
+	<evaluate expression="taskAddController.initActionGeofence()"
+		result="flowScope.actionGeofence" />
+
+</transition>
+		
+		<!-- /****************************************************************************************/ -->
+		
+		
+		<transition on="pipelineTask" to="actionPipelineTask">
+			<evaluate expression="taskAddController.initActionPipelineTask()"
+				result="flowScope.actionPipelineTask" />
+		</transition>
+		<transition on="activityDetection" to="checkActivityDetection" />
+		<transition on="questionnaire" to="actionQuestionnaireDescription">
+			<evaluate expression="taskAddController.initActionQuestionaire()"
+				result="flowScope.actionQuestionaire" />
+		</transition>
+		<transition on="assignUsers" to="taskSelectUsers">
+			<evaluate expression="taskAddController.initTaskAssignedUsers()"
+				result="flowScope.taskAssignedUsersForm" />
+		</transition>
+
+		<transition on="assignTaskGroups" to="selectStrategyGroup">
+			<evaluate expression="taskAddController.initGroupsTask()"
+				result="flowScope.groupsTask" />
+			<evaluate expression="taskAddController.initAvailablePointsStrategies()"
+				result="flowScope.availablePointsStrategies" />
+			<evaluate expression="taskAddController.initStategyHolder()"
+				result="flowScope.strategyHolder" />
+		</transition>
+
+		<transition on="notification_area" to="checkNotification" />
+		<transition on="activation_area" to="checkActivation" />
+		<transition on="cancel" to="end" />
+	</view-state>
+	
+	<view-state id="selectStrategyGroup" model="strategyHolder"
+		view="/protected/task/add/selectStrategyGroup">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="taskSummaryGroups">
+			<evaluate
+				expression="taskAddController.validateSelectedStrategy(flowScope.strategyHolder, messageContext)" />
+		</transition>
+		<transition on="cancel" to="taskSelectUsers" />
+	</view-state>
+
+	<view-state id="selectTaskUsersByGroups" view="/protected/task/add/selectTaskUsersByGroups"
+		model="task">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="cancel" to="selectActionType" />
+		<transition on="copy_from_activation_area" to="selectActionType">
+			<evaluate
+				expression="taskAddController.copyNotificationFromActivation(flowScope.task)" />
+		</transition>
+		<transition on="new_notification_area" to="notificationArea" />
+	</view-state>
+	
+	<view-state id="taskSummaryGroups" model="task"
+		view="/protected/task/add/taskSummaryGroups">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="finish" to="end">
+			<evaluate
+				expression="taskAddController.createAndAssignPipelineTask(task, flowScope.strategyHolder)" />
+		</transition>
+		<transition on="cancel" to="end" />
+	</view-state>
+
+	<decision-state id="checkSensing">
+		<secured attributes="ROLE_ADMIN" />
+		<if
+			test="flowScope.task.sensingDuration == null or flowScope.task.sensingDuration == 0"
+			then="addDuration" else="actionSensing" />
+	</decision-state>
+
+	<decision-state id="checkNotification">
+		<secured attributes="ROLE_ADMIN" />
+		<if test="flowScope.task.activationArea != null" then="notificationAreaCopyFromActivation"
+			else="notificationArea" />
+	</decision-state>
+
+	<decision-state id="checkActivation">
+		<secured attributes="ROLE_ADMIN" />
+		<if test="flowScope.task.notificationArea != null" then="activationAreaCopyFromNotification"
+			else="activationArea" />
+	</decision-state>
+
+	<view-state id="notificationAreaCopyFromActivation"
+		view="/protected/task/add/notificationCopyFromActivation" model="task">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="cancel" to="selectActionType" />
+		<transition on="copy_from_activation_area" to="selectActionType">
+			<evaluate
+				expression="taskAddController.copyNotificationFromActivation(flowScope.task)" />
+		</transition>
+		<transition on="new_notification_area" to="notificationArea" />
+	</view-state>
+
+	<view-state id="activationAreaCopyFromNotification"
+		view="/protected/task/add/activationCopyFromNotification" model="task">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="cancel" to="selectActionType" />
+		<transition on="copy_from_notification_area" to="selectActionType">
+			<evaluate
+				expression="taskAddController.copyActivationFromNotification(flowScope.task)" />
+		</transition>
+		<transition on="new_activation_area" to="activationArea" />
+	</view-state>
+
+	<view-state id="notificationArea" view="/protected/task/add/notificationArea"
+		model="task">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="ok" to="selectActionType">
+			<evaluate
+				expression="taskAddController.validateWTK(flowScope.task.notificationArea, 'notificationArea', messageContext)" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+
+	<view-state id="activationArea" view="/protected/task/add/activationArea"
+		model="task">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="ok" to="selectActionType">
+			<evaluate
+				expression="taskAddController.validateWTK(flowScope.task.activationArea, 'activationArea', messageContext)" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+
+	<action-state id="checkActivityDetection">
+		<secured attributes="ROLE_ADMIN" />
+		<evaluate expression="task.hasActivityDetection()" />
+		<transition on="yes" to="selectActionType" />
+		<transition on="no" to="actionActivityDetection">
+			<evaluate expression="taskAddController.initActionActivityDetection()"
+				result="flowScope.actionActivityDetection" />
+		</transition>
+	</action-state>
+
+	<view-state id="actionActivityDetection" view="/protected/task/add/actionActivityDetection"
+		model="actionActivityDetection">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="selectActionType">
+			<evaluate
+				expression="taskAddController.validateActivityDetection(flowScope.task, actionActivityDetection, messageContext)" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+
+	<view-state id="addDuration" view="/protected/task/add/actionSensingDuration"
+		model="task">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="actionSensing">
+			<evaluate
+				expression="taskAddController.validateSensingDuration(flowScope.task, messageContext)" />
+		</transition>
+		<transition on="cancel" to="selectActionType">
+			<evaluate expression="taskAddController.purgeDuration(flowScope.task)" />
+		</transition>
+	</view-state>
+
+	<view-state id="actionSensing" model="actionSensing"
+		view="/protected/task/add/actionSensing">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="selectActionType">
+			<evaluate
+				expression="taskAddController.validateActionSensing(flowScope.task, actionSensing, messageContext)" />
+			<evaluate
+				expression="taskAddController.addActionToTask(flowScope.task, actionSensing)" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+
+	<view-state id="actionPhoto" model="actionPhoto"
+		view="/protected/task/add/actionPhoto">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="selectActionType">
+			<evaluate
+				expression="taskAddController.validateActionPhoto(flowScope.task, actionPhoto, messageContext)" />
+			<evaluate
+				expression="taskAddController.addActionToTask(flowScope.task, actionPhoto)" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+	
+	<!-- /****************************************************************************************/ -->
+	<view-state id="actionGeofence" model="actionGeofence" view="/protected/task/add/actionGeofence">
+		<secured attributes="ROLE_ADMIN"/>
+		<transition on="next" to="selectActionType">
+			    <evaluate expression="taskAddController.validateActionGeofence(flowScope.task, flowScope.actionGeofence, messageContext)"/> 
+			<evaluate expression="taskAddController.addActionGeofenceToTask(flowScope.task, flowScope.actionGeofence, flowScope.actionGeofenceList)" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+	
+	
+	<!-- /****************************************************************************************/ -->
+
+	<view-state id="actionPipelineTask" model="actionPipelineTask"
+		view="/protected/task/add/actionPipelineTask">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="actionPipelineTaskChooseResponse">
+			<evaluate expression="taskAddController.initSimplePipelineTaskResponse()"
+				result="flowScope.simplePipelineTaskResponse" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+
+	<view-state id="actionPipelineTaskChooseResponse" model="simplePipelineTaskResponse"
+		view="/protected/task/add/actionPipelineTaskChooseResponse">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="selectActionType">
+			<evaluate
+				expression="taskAddController.validateActionPipelineTask(flowScope.actionPipelineTask, simplePipelineTaskResponse, messageContext)" />
+			<evaluate
+				expression="taskAddController.addActionToTask(flowScope.task, actionPipelineTask)" />
+		</transition>
+		<transition on="cancel" to="actionPipelineTask" />
+	</view-state>
+
+	<view-state id="taskSelectUsers" model="taskAssignedUsersForm"
+		view="/protected/task/add/selectTaskUsers">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="taskChoosePointsStrategy">
+			<evaluate
+				expression="taskAddController.validateSelectedUsers(taskAssignedUsersForm, messageContext)" />
+			<evaluate
+				expression="taskAddController.getAsUsers(taskAssignedUsersForm.userList, null, null)"
+				result="flowScope.assignedUsers" />
+			<evaluate expression="taskAddController.initAvailablePointsStrategies()"
+				result="flowScope.availablePointsStrategies" />
+			<evaluate expression="taskAddController.initStategyHolder()"
+				result="flowScope.strategyHolder" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+
+	<view-state id="taskChoosePointsStrategy" model="strategyHolder"
+		view="/protected/task/add/selectStrategy">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="taskSummary">
+			<evaluate
+				expression="taskAddController.validateSelectedStrategy(flowScope.strategyHolder, messageContext)" />
+		</transition>
+		<transition on="cancel" to="taskSelectUsers" />
+	</view-state>
+
+	<view-state id="taskSummary" model="task"
+		view="/protected/task/add/taskSummary">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="finish" to="end">
+			<evaluate
+				expression="taskAddController.createAndAssignTask(task, flowScope.assignedUsers, flowScope.strategyHolder)" />
+		</transition>
+		<transition on="cancel" to="end" />
+	</view-state>	
+
+	<view-state id="actionQuestionnaireDescription" model="actionQuestionaire"
+		view="/protected/task/add/actionQuestionnaireDescription">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="actionQuestionnaireChooseQuestion">
+			<evaluate
+				expression="taskAddController.validateActionQuestionnaire(flowScope.task, actionQuestionaire, messageContext)" />
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+
+	<view-state id="actionQuestionnaireChooseQuestion" model="actionQuestionaire"
+		view="/protected/task/add/actionQuestionnaireChooseQuestion">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="openquestion" to="actionQuestionnaireOpenQuestion">
+			<evaluate
+				expression="taskAddController.initOpenQuestion(flowScope.actionQuestionaire)"
+				result="flowScope.openquestion" />
+		</transition>
+		<transition on="closedquestionsin" to="actionQuestionnaireClosedSingleQuestion">
+			<evaluate expression="taskAddController.initSimpleMultipleQuestion()"
+				result="flowScope.simpleMultipleQuestion" />
+		</transition>
+		<transition on="closedquestionmul" to="actionQuestionnaireClosedMultipleQuestion">
+			<evaluate expression="taskAddController.initSimpleMultipleQuestion()"
+				result="flowScope.simpleMultipleQuestion" />
+		</transition>
+		<transition on="done" to="selectActionType">
+			<evaluate
+				expression="taskAddController.validateAndAddQuestionnaire(flowScope.task, flowScope.actionQuestionaire)"></evaluate>
+		</transition>
+		<transition on="cancel" to="selectActionType" />
+	</view-state>
+
+	<view-state id="actionQuestionnaireOpenQuestion" model="openquestion"
+		view="/protected/task/add/actionQuestionnaireOpenQuestion">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="actionQuestionnaireChooseQuestion">
+			<evaluate
+				expression="taskAddController.validateOpenQuestion(actionQuestionaire, openquestion, messageContext)" />
+		</transition>
+		<transition on="cancel" to="actionQuestionnaireChooseQuestion" />
+	</view-state>
+
+	<view-state id="actionQuestionnaireClosedSingleQuestion"
+		model="simpleMultipleQuestion" view="/protected/task/add/actionQuestionnaireClosedSingleQuestion">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="actionQuestionnaireChooseQuestion">
+			<evaluate
+				expression="taskAddController.validateClosedQuestion(flowScope.actionQuestionaire, simpleMultipleQuestion, true, messageContext)"></evaluate>
+		</transition>
+		<transition on="cancel" to="actionQuestionnaireChooseQuestion" />
+	</view-state>
+
+	<view-state id="actionQuestionnaireClosedMultipleQuestion"
+		model="simpleMultipleQuestion" view="/protected/task/add/actionQuestionnaireClosedMultipleQuestion">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="actionQuestionnaireChooseQuestion">
+			<evaluate
+				expression="taskAddController.validateClosedQuestion(flowScope.actionQuestionaire, simpleMultipleQuestion, false, messageContext)"></evaluate>
+		</transition>
+		<transition on="cancel" to="actionQuestionnaireChooseQuestion" />
+	</view-state>
+
+	<end-state id="end" view="redirect:/" />
+</flow>

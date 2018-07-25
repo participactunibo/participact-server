@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+
+	<display-name>PAServer Custom Functions</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>paserver-funcs</short-name>
+	<uri>http://pabrain.ing.unibo.it/paserver-funcs</uri>
+
+	<function>
+		<name>minutesToReadableTime</name>
+		<function-class>it.unibo.paserver.web.functions.PAServerUtils</function-class>
+		<function-signature>java.lang.String minutesToReadableTime(java.lang.Long)</function-signature>
+	</function>
+
+	<function>
+		<name>actionToString</name>
+		<function-class>it.unibo.paserver.web.functions.PAServerUtils</function-class>
+		<function-signature>java.lang.String actionToString(it.unibo.paserver.domain.Action)</function-signature>
+	</function>
+	
+	<function>
+		<name>actionType</name>
+		<function-class>it.unibo.paserver.web.functions.PAServerUtils</function-class>
+		<function-signature>java.lang.String actionType(it.unibo.paserver.domain.Action)</function-signature>
+	</function>
+</taglib>

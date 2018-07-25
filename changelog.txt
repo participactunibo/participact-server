@@ -1,0 +1,83 @@
+== 10.54-20180206
+- Added License
+
+== 10.53-20160128
+- Added choice of POI when creating a new task
+
+== 10.52-20151005
+- (bugfix) user unable to create a new task without selecting friends
+
+== 10.51-20151002
+- Fixed interest point send to server
+
+== 10.50-20150928
+- Database Update
+- Added interest point
+
+== 10.00-20150918
+- Database Update
+- Added support to group tasks
+	- group calculation
+	- group task creation
+
+== 9.06-20150413
+- (bugfix) user unable to create a new task without selecting friends
+
+== 9.05-20150323
+- (bugfix) unable to create new users
+
+== 9.04-20150312
+- (bugfix) statistics page corrected
+
+== 9.03-20150311
+- Added statistics page on admin dashboard
+- (bugfix) out of bound in user task creation
+
+== 9.02-20150218
+- (bugfix) Managing exception during strategy assignment in older tasks
+
+== 9.01-20150216
+- Minor Database Update
+- Added support to friends tasks (minor database update)
+
+== 9.00-20150210
+- Database Update
+- Added badges
+- Added points assignments on user reliability
+- Change db configuration
+- Added pipeline datadr (activity with bus and train)
+- (bugfix) security on user statistics
+
+== 8.03-20140731
+- Added user statistics
+
+== 8.01-20140318
+- Added support for circular areas for geoactivation and geonotification
+- (bugfix) Support more than 2 geographical areas
+- (bugfix) Anonymize photo data (r1147)
+
+== 8.00-20140306
+- Fixed unit test: force refresh of data before counting (r1103)
+- Supporting Activity Detection tasks (r1110:1117)
+- Added support for notification and activation areas in tasks (requires database schema update)
+- Added support for administrator roles (requires database schema update and update queries) (r1125)
+- Added anonymization for administrators with view only roles (r1125)
+- (bugfix) Rejecting tasks always returned 500 as result, now it returns 200 if the task was successfully rejected (r1125)
+- Added support for Google Activity Detection pipeline
+
+== 7.03-20140220
+- Showing photo per actions now shows only photos of that action (instead of all the task photos) (r1085)
+- Fixed showData jsp file for DataAccelerometerClassifier (r1086)
+- Made UserLogFile cacheable for better performances (r1087)
+- Order actions when showing TaskReports (r1088)
+- Added pie charts for task status (r1091)
+- Added support to add all active users to a new task (r1096)
+- Added support for lazy taskResult data updating (r1098)
+
+== v7.02-20131220
+- Support for client versioning REST requests (requires database schema update)
+- Fixed questionnaire views
+- Fixed adding users to existing tasks (no new users can be added to expired tasks)
+
+== v6.07-20131112
+- Everything else

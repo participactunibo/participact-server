@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8080/" />
+<title>Login add user</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Login add user</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/participact-server/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_username</td>
+	<td>root</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_password</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Mario</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=surname</td>
+	<td>Rossi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=birthdate</td>
+	<td>1984-01-01</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=gender1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=currentAddress</td>
+	<td>v.le Risorgimento 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=currentZipCode</td>
+	<td>40136</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=currentCity</td>
+	<td>Bologna</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=currentProvince</td>
+	<td>BO</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=domicileAddress</td>
+	<td>via Malpertuso 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=domicileZipCode</td>
+	<td>40130</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=domicileCity</td>
+	<td>Bologna</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=domicileProvince</td>
+	<td>BO</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=officialEmail</td>
+	<td>mario.rossi@studio.unibo.it</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=contactPhoneNumber</td>
+	<td>3471234567</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=documentIdType</td>
+	<td>label=Carta d'identità</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=documentId</td>
+	<td>AJ000000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=uniCity</td>
+	<td>label=Bologna</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=uniSchool</td>
+	<td>label=Ingegneria e Architettura</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=uniDepartment</td>
+	<td>DISI</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=uniDegree</td>
+	<td>Ingegneria Informatica</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=uniCourse</td>
+	<td>label=Triennale</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=uniYear</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=projectEmail</td>
+	<td>mario.rossi@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=facebookEmail</td>
+	<td>mario.rossi@gmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>lapassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=confirmPassword</td>
+	<td>lapassword</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=simStatus</td>
+	<td>label=Portabilità</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;PORTABILITY&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cf</td>
+	<td>MRARSS1455F965K</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=projectPhoneNumber</td>
+	<td>3281234567</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=originalPhoneOperator</td>
+	<td>Wind</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=iccid</td>
+	<td>0123456789012345678</td>
+</tr>
+</tbody></table>
+</body>
+</html>

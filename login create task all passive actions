@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8080/" />
+<title>login create task all passive actions</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">login create task all passive actions</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/participact-server/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=h2 &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_username</td>
+	<td>root</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_password</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tasks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Test task</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Task di prova</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start</td>
+	<td>2013-07-13 15:20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=deadline</td>
+	<td>2013-10-13 15:20</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=duration</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=points</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=sensingDuration</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=APP_ON_SCREEN</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=CELL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=INSTALLED_APPS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=LOCATION</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=APPS_NET_TRAFFIC</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=DEVICE_NET_TRAFFIC</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_assignUsers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=userList</td>
+	<td>openmario@studio.unibo.it</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

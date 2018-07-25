@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+
+	<on-start>
+        <evaluate expression="taskValutateController.initAllUsers()"	result="flowScope.allUsersArrayString" />
+	</on-start>
+
+	<!-- <input name="taskId" required="true"/> -->
+
+	<view-state id="valutateTask" model="userTask"
+		view="/protected/task/valutate/valutate">
+		<secured attributes="ROLE_ADMIN" />
+		<on-entry>
+			<set name="flowScope.userTaskId" value="requestParameters.userTaskId"
+				type="long" />
+			<evaluate expression="taskValutateController.getTaskUser(userTaskId)"
+				result="flowScope.userTask"></evaluate>
+		</on-entry>
+		<transition on="approve" to="taskSelectUsers">
+		</transition>
+		<transition on="refuse" to="endStateRedirect">
+			<evaluate expression="taskValutateController.valutateTask(userTask,false,null)"></evaluate>
+		</transition>
+	</view-state>
+
+	<view-state id="taskSelectUsers" model="taskAssignedUsersForm"
+		view="/protected/task/valutate/addUsers">
+		
+		<secured attributes="ROLE_ADMIN" />
+		<on-entry>
+		<set name="flowScope.task" value="flowScope.userTask.task"/>
+		<evaluate expression="taskAddUsersController.initAssignedUsersForm()" result = "flowScope.taskAssignedUsersForm" />
+		</on-entry>
+		<transition on="next" to="taskChoosePointsStrategy">
+			<evaluate expression="taskAddUsersController.validateSelectedUsers(task.id, taskAssignedUsersForm, messageContext)" />
+			<evaluate expression="taskValutateController.initAvailablePointsStrategies()" result="flowScope.availablePointsStrategies" />
+			<evaluate expression="taskValutateController.initStategyHolder()" result="flowScope.strategyHolder" />
+		</transition>
+		<transition on="cancel" to="endStateRedirect" />
+	</view-state>
+	
+	<view-state id="taskChoosePointsStrategy" model="strategyHolder"
+		view="/protected/task/add/selectStrategy">
+		<secured attributes="ROLE_ADMIN"/>
+		<transition on="next" to="taskChooseApprovedPoints">
+			<evaluate expression="taskValutateController.validateSelectedStrategy(flowScope.strategyHolder, messageContext)" />
+			<evaluate expression="taskValutateController.initApprovedPointsHolder()" result="flowScope.approvedPointsHolder" />
+		</transition>
+		<transition on="cancel" to="taskSelectUsers" />
+	</view-state>
+	
+	<view-state id="taskChooseApprovedPoints" model="approvedPointsHolder"
+		view="/protected/task/add/selectApprovedPoints">
+		<secured attributes="ROLE_ADMIN"/>
+		<transition on="next" to="taskSummary">
+			<evaluate expression="taskValutateController.validateApprovedPoints(flowScope.approvedPointsHolder, messageContext)" />
+		</transition>
+		<transition on="cancel" to="taskChoosePointsStrategy" />
+	</view-state>
+
+	<view-state id="taskSummary" model="taskAssignedUsersForm"
+		view="/protected/task/addUsers/taskSummary">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="next" to="confirm"/>
+		<transition on="cancel" to="endStateRedirect" />
+	</view-state>
+
+	<view-state id="confirm" model="taskAssignedUsersForm"
+		view="/protected/task/addUsers/confirmation">
+		<secured attributes="ROLE_ADMIN" />
+		<transition on="finish" to="approveTask" />
+	</view-state>
+
+	<action-state id="approveTask">
+	<evaluate expression="taskValutateController.valutateTask(userTask,true,flowScope.strategyHolder)"></evaluate>
+	<transition to="assignNewUsers"></transition>
+	</action-state>
+	
+	<action-state id="assignNewUsers">
+	<evaluate expression="taskAddUsersController.assignNewUsers(task.id, taskAssignedUsersForm)" />
+	<transition to="assignApprovedPoints"></transition>
+	</action-state>
+	
+	<action-state id="assignApprovedPoints">
+	<evaluate expression="taskValutateController.assignApprovedPoints(userTask, flowScope.approvedPointsHolder)" />
+	<transition to="endStateRedirect"></transition>
+	</action-state>
+
+	<end-state id="endStateRedirect" view="redirect:/protected/task"></end-state>
+
+</flow>

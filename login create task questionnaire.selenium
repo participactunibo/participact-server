@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8080/" />
+<title>login create task questionnaire</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">login create task questionnaire</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/participact-server/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=h2 &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>name=j_username</td>
+	<td>root</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>name=j_password</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tasks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=name</td>
+	<td>Test task</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Task with questionnaire</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=start</td>
+	<td>2013-09-13 13:00</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=deadline</td>
+	<td>2013-09-13 16:30</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=duration</td>
+	<td>20</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=points</td>
+	<td>200</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_questionnaire</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=title</td>
+	<td>The first questionnaire</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_openquestion</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=question</td>
+	<td>Describe in three words how are you feeling right now.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_closedquestionsin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=question</td>
+	<td>Multiple choice single answer question.</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=answers0</td>
+	<td>First answer</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=answers1</td>
+	<td>Second anser</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=answers1</td>
+	<td>Second answer</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=answers2</td>
+	<td>Third answer</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_closedquestionmul</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=question</td>
+	<td>Multiple choice multiple answer question.</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=answers0</td>
+	<td>Prima risposta</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=answers1</td>
+	<td>Seconda risposta</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=answers2</td>
+	<td>Terza risposta</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=answers3</td>
+	<td>Quarta risposta</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_done</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=name</td>
+	<td>Fotografia con descrizione molto lunga per controllare che tutto il testo venga mostrato. Verrà mostrato? Chi lo sa.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_sensingMost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=sensingDuration</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=input_type</td>
+	<td>label=APP_ON_SCREEN</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_eventId_photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=name</td>
+	<td>Foto di prova</td>
+</tr>
+</tbody></table>
+</body>
+</html>

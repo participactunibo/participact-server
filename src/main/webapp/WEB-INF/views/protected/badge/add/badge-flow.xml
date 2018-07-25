@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<on-start>
+        <evaluate expression="badgeAddController.initBadgeHolder()"	result="flowScope.holder" />
+	</on-start>
+	
+	<view-state id="badgeDetails" view="/protected/badge/add/badgeDetails" model="holder">
+		<secured attributes="ROLE_ADMIN"/>
+		<transition on="actionsBadge" to="addActionsBadgeDetails">
+			<evaluate expression="badgeAddController.validateBadgeDetails(flowScope.holder, messageContext)" />
+			<evaluate expression="badgeAddController.initAvailableActionTypes()" result="flowScope.availableActionTypes" />
+			<evaluate expression="badgeAddController.initBadgeActions(flowScope.holder)" result="flowScope.badgeActions" />
+		</transition>
+		<transition on="taskBadge" to="addTaskBadgeDetails">
+			<evaluate expression="badgeAddController.validateBadgeDetails(flowScope.holder, messageContext)" />
+			<evaluate expression="badgeAddController.initAvailableTasks()" result="flowScope.availableTasks" />
+			<evaluate expression="badgeAddController.initIdTaskHolder()" result="flowScope.idTaskHolder" />
+		</transition>
+		<transition on="cancel" to="end" />
+	</view-state>
+	
+	
+	
+	<view-state id="addActionsBadgeDetails" model="badgeActions" view="/protected/badge/add/actionsDetails">
+		<secured attributes="ROLE_ADMIN"/>
+		<transition on="finish" to="end">
+			<evaluate expression="badgeAddController.validateActionsBadgeDetails(flowScope.badgeActions, messageContext)" />
+			<evaluate expression="badgeAddController.saveBadge(badgeActions)" />
+		</transition>
+		<transition on="cancel" to="end" />
+	</view-state>
+	
+	<view-state id="addTaskBadgeDetails" model="idTaskHolder" view="/protected/badge/add/taskDetails">
+		<secured attributes="ROLE_ADMIN"/>
+		<transition on="finish" to="end">
+			<evaluate expression="badgeAddController.validateTaskBadgeDetails(flowScope.idTaskHolder, messageContext)" />
+			<evaluate expression="badgeAddController.saveBadge(holder,idTaskHolder)" />
+		</transition>
+		<transition on="cancel" to="end" />
+	</view-state>
+	
+	<end-state id="end" view="redirect:/" />
+</flow>
