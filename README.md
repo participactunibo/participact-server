@@ -43,3 +43,11 @@ thanks to help of many students.
 * For the first launch set __property name="hibernate.hbm2ddl.auto" value="create"__ in the file 
 __/src/main/resources/META-INF/persistence.xml__ to let Hibernate creates the tables. For the next executions 
 set the same value to __update__
+
+## THANKS
+When use this application in your publications, please cite:
+* [ParticipAct: A Large-Scale Crowdsensing Platform](http://ieeexplore.ieee.org/document/7111277/) 
+* [Mobile crowd sensing management with the ParticipAct living lab](https://www.sciencedirect.com/science/article/pii/S1574119216302127)
+
+## CONTACTS
+If you have problems, questions, ideas or suggestions, please contact us:[participact@unibo.it](mailto:participact@unibo.it)
